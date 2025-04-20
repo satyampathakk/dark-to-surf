@@ -1,0 +1,28 @@
+{
+  "name": "dark-to-surf",
+  "version": "1.0.0",
+  "main": "server.js",
+
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.8.4",
+    "axios-cookiejar-support": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "cheerio": "^1.0.0",
+    "express": "^5.1.0",
+    "morgan": "^1.10.0",
+    "socks-proxy-agent": "^8.0.5",
+    "tough-cookie": "^5.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
