@@ -85,6 +85,28 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     }
 
+    /* Search engines list */
+    .search-engines {
+      margin: 1rem 0;
+      padding: 0;
+      list-style: none;
+      text-align: left;
+    }
+
+    .search-engines li {
+      margin: 0.5rem 0;
+    }
+
+    .search-engines a {
+      color: #f0a500;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    .search-engines a:hover {
+      color: #d88e00;
+    }
+
     /* Adding responsive design */
     @media (max-width: 768px) {
       input[type="text"] {
@@ -100,6 +122,16 @@
 <body>
   <div class="container">
     <h1>Tor Proxy Browser</h1>
+    <!-- Search engines section -->
+    <div>
+      <h3>Popular Onion Directories:</h3>
+      <ul class="search-engines">
+        <li><a href="/proxy?url=http://xmh57jrknzkhv6y3ls3ubitzfqnkrwxhopf5aygthi7d6rplyvk3noyd.onion/cgi-bin/omega/omega" target="view">Torch</a></li>
+        <li><a href="/proxy?url=http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/" target="view">Ahmia</a></li>
+        <li><a href="/proxy?url=http://jaz45aabn5vkemy4jkg4mi4syheisqn2wn2n4fsuitpccdackjwxplad.onion/" target="view">Onion Directory</a></li>
+      </ul>
+    </div>
+
     <form onsubmit="go(event)">
       <div>
         <label for="searchEngine">Search Engine Mode</label>
@@ -112,7 +144,7 @@
         <button type="submit">Go</button>
       </div>
     </form>
-    <iframe id="view"></iframe>
+    <iframe id="view" name="view"></iframe>
   </div>
 
   <script>
@@ -121,8 +153,8 @@
       const input = document.getElementById('url').value;
       const searchEngineMode = document.getElementById('searchEngine').checked;
       const frame = document.getElementById('view');
-        // Normal mode: direct URL
-        frame.src = '/proxy?url=' + encodeURIComponent(input);
+      // Normal mode: direct URL
+      frame.src = '/proxy?url=' + encodeURIComponent(input);
     }
   </script>
 </body>
