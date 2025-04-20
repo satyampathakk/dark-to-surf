@@ -5,26 +5,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tor Proxy Browser</title>
   <style>
-    body { font-family: sans-serif; padding: 2rem; background: #111; color: #eee; }
-    input { width: 80%; padding: 0.5rem; }
-    button { padding: 0.5rem 1rem; }
-    iframe { width: 100%; height: 80vh; border: 1px solid #444; margin-top: 1rem; }
+    /* Global styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #2a2a2a, #333);
+      color: #fff;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #f0a500;
+      margin-bottom: 1rem;
+    }
+
+    /* Container for form */
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Input field styling */
+    input[type="text"] {
+      width: 70%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 2px solid #444;
+      background-color: #333;
+      color: #fff;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #f0a500;
+    }
+
+    /* Button styling */
+    button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #f0a500;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #d88e00;
+    }
+
+    /* Checkbox styling */
+    input[type="checkbox"] {
+      margin: 0.5rem;
+      transform: scale(1.2);
+    }
+
+    label {
+      font-size: 1rem;
+      color: #fff;
+      margin-right: 1rem;
+    }
+
+    /* Iframe styling */
+    iframe {
+      width: 100%;
+      height: 80vh;
+      border: none;
+      border-radius: 12px;
+      margin-top: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Adding responsive design */
+    @media (max-width: 768px) {
+      input[type="text"] {
+        width: 85%;
+      }
+      
+      button {
+        width: 85%;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Tor Proxy Browser</h1>
-  <form onsubmit="go(event)">
-    <input id="url" placeholder="Enter URL (http://example.onion or clearnet)" />
-    <button type="submit">Go</button>
-  </form>
-  <iframe id="view"></iframe>
+  <div class="container">
+    <h1>Tor Proxy Browser</h1>
+    <form onsubmit="go(event)">
+      <div>
+        <label for="searchEngine">Search Engine Mode</label>
+        <input type="checkbox" id="searchEngine" />
+      </div>
+      <div>
+        <input id="url" type="text" placeholder="Enter URL (http://example.onion or clearnet)" />
+      </div>
+      <div>
+        <button type="submit">Go</button>
+      </div>
+    </form>
+    <iframe id="view"></iframe>
+  </div>
 
   <script>
     function go(e) {
       e.preventDefault();
       const input = document.getElementById('url').value;
+      const searchEngineMode = document.getElementById('searchEngine').checked;
       const frame = document.getElementById('view');
-      frame.src = '/proxy?url=' + encodeURIComponent(input);
+        // Normal mode: direct URL
+        frame.src = '/proxy?url=' + encodeURIComponent(input);
     }
   </script>
 </body>

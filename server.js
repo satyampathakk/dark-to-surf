@@ -4,6 +4,7 @@ const path = require('path');
 const cheerio = require('cheerio');
 const { SocksProxyAgent } = require('socks-proxy-agent');
 const bodyParser = require('body-parser');
+const { url } = require('inspector');
 
 const app = express();
 const PORT = 3000;
@@ -26,11 +27,25 @@ const torBrowserHeaders = {
   'Upgrade-Insecure-Requests': '1',
 };
 
-// Smart proxy route
+// Proxy route
 app.all('/proxy', async (req, res) => {
-  const rawUrl = req.query.url;
+  let rawUrl = req.query.url;
+  const referer = req.headers.referer;
+  const query=req.url
+  const q = referer.split("=")[1];    // gives access to query params
+  const urlpath=query.split('?')[1]
+  const targetUrl = q+"?"+urlpath; 
+  console.log(rawUrl)
+  console.log(q)
+  console.log(referer)
+  console.log(decodeURIComponent(targetUrl))
+  if (!rawUrl){
+    rawUrl=decodeURIComponent(targetUrl);
+  }
+
+  // Ensure the URL starts with http:// or https://
   if (!rawUrl || (!rawUrl.startsWith('http://') && !rawUrl.startsWith('https://'))) {
-    return res.status(400).send('❌ Invalid or missing URL.');
+    return res.status(400).send('❌ Invalid or missing URL. Make sure the URL starts with "http://" or "https://"');
   }
 
   const baseUrl = new URL(rawUrl);
